@@ -1,7 +1,7 @@
 #include "defs.h"
 
 int Sq120ToSq64[BRD_SQ_NUM];
-int Sq640ToSq120[64];
+int Sq64ToSq120[64];
 
 void InitSq120To64(){
 	
@@ -16,13 +16,14 @@ void InitSq120To64(){
 	}
 	
 	for(index = 0; index < 64; ++index){
-		Sq640ToSq120[index] = 120;
+		Sq64ToSq120[index] = 120;
 	}
 	
+	//Go from rank A1 to H8. (file = numbers on the board, rank = letters on the board)
 	for(rank = RANK_1; rank <= RANK_8; ++rank){
 		for(file = FILE_A; file <= FILE_H; ++file){
 			sq = FR2SQ(file, rank);
-			Sq640ToSq120[sq64] = sq;
+			Sq64ToSq120[sq64] = sq;
 			Sq120ToSq64[sq] = sq64;
 			sq64++;
 		}
@@ -30,5 +31,5 @@ void InitSq120To64(){
 }
 	
 void AllInit(){
-
+	InitSq120To64();
 }
