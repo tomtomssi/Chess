@@ -7,13 +7,10 @@ int main(){
 	int index = 0;
 	
 	AllInit();
-		
 	for( index = 0; index < 64; ++index){
 		printf("Index:%d\n", index);
 		PrintBitBoard(SetMask[index]);
 		printf("\n");
-		
-	}
-	
+	}	
 	return 0;
 }

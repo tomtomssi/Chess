@@ -20,7 +20,6 @@ int CountBits(U64 b){
 	for( r = 0; b; r++, b &= b - 1);
 	return r;
 }
-
 void PrintBitBoard(U64 bb){
 	U64 shiftMe = 1ULL;
 	

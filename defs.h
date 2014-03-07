@@ -25,7 +25,7 @@ typedef unsigned long long U64;
 #define MAXGAMEMOVES 2048
 
 //boards pieces w = white, b = black
-enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ };
+enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 
 //board locations A-H, 1-8
 enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_EMPTY };
@@ -100,11 +100,16 @@ typedef struct	{
 	extern int Sq64ToSq120[64];
 	extern U64 SetMask[64];
 	extern U64 ClearMask[64];
+	extern U64 PieceKeys[13][120];
+	extern U64 SideKey;
+	extern U64 CastleKeys[16];
 	//FUNCTIONS
 	extern void AllInit();
 	
 	extern void PrintBitBoard(U64 bb);
 	extern int PopBit(U64 *bb);
 	extern int CountBits(U64 b);
+	
+	extern U64 GeneratePosKey(const S_BOARD *pos);
 
 #endif
