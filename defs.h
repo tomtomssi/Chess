@@ -12,7 +12,7 @@ if(!(n)) { \
 printf("%s - Failed", #n); \
 printf("On %s ",__DATE__); \
 printf("At %s ",__TIME__); \
-printf("In File %s, ",__FILE__); \
+printf("In File %s ",__FILE__); \
 printf("At Line %d\n",__LINE__); \
 exit(1);}
 #endif 
@@ -24,12 +24,14 @@ typedef unsigned long long U64;
 
 #define MAXGAMEMOVES 2048
 
+#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 //boards pieces w = white, b = black
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 
 //board locations A-H, 1-8
-enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_EMPTY };
-enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_EMPTY };
+enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE };
+enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
 
 enum { WHITE, BLACK, BOTH };
 
@@ -95,7 +97,7 @@ typedef struct	{
 	#define POP(b) PopBit(b)
 	#define CNT(b) CountBits(b)
 	#define CLRBIT(bb,sq) ((bb) &= ClearMask[(sq)])
-	#define SETBIT(bb,sq) ((bb) |= ClearMask[(sq)])
+	#define SETBIT(bb,sq) ((bb) |= SetMask[(sq)])
 	//GLOBALS
 	extern int Sq120ToSq64[BRD_SQ_NUM];
 	extern int Sq64ToSq120[64];
@@ -104,6 +106,10 @@ typedef struct	{
 	extern U64 PieceKeys[13][120];
 	extern U64 SideKey;
 	extern U64 CastleKeys[16];
+	extern char PceChar[];
+	extern char SideChar[];
+	extern char RankChar[];
+	extern char FileChar[];
 	//FUNCTIONS
 	extern void AllInit();
 	extern void ResetBoard(S_BOARD *pos);
@@ -112,5 +118,7 @@ typedef struct	{
 	extern int CountBits(U64 b);
 	
 	extern U64 GeneratePosKey(const S_BOARD *pos);
+	extern int ParseFen(char *fen, S_BOARD *pos);
+	extern void PrintBoard(const S_BOARD *pos);
 
 #endif

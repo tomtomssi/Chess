@@ -1,15 +1,16 @@
 #include "defs.h"
 #include "stdlib.h"
+#include "stdio.h"
 
 // rand tuottaa 15 bitin random luvun, niitä siirretään aina sivulle 15
 // 0000 000000000000000 000000000000000 000000000000000 111111111111111
 // 0000 000000000000000 000000000000000 111111111111111 000000000000000
 // 0000 000000000000000 111111111111111 000000000000000 000000000000000
 // 1111 111111111111111 000000000000000 000000000000000 000000000000000
-#define RAND_64 (	(U64)rand() + \
-					(U64)rand() << 15 + \
-					(U64)rand() << 30 + \
-					(U64)rand() << 45 + \
+#define RAND_64 (	(U64)rand() | \
+					(U64)rand() << 15 | \
+					(U64)rand() << 30 | \
+					(U64)rand() << 45 | \
 					((U64)rand() & 0xf) << 60	)
 
 int Sq120ToSq64[BRD_SQ_NUM];
@@ -26,7 +27,7 @@ void InitHashKeys(){
 	int index = 0;
 	int index2 = 0;
 	for( index = 0; index < 13; ++index){
-		for(index2 = 0; index < 120; ++index){
+		for(index2 = 0; index2 < 120; ++index2){
 			PieceKeys[index][index2] = RAND_64;
 		}
 	}
