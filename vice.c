@@ -4,20 +4,16 @@
 int main(){
 
 	U64 playBitBoard = 0ULL;
-	int count;
-
+	int index = 0;
+	
 	AllInit();
-	
-	playBitBoard |= (1ULL << SQ64(D2));
-	playBitBoard |= (1ULL << SQ64(D3));
-	playBitBoard |= (1ULL << SQ64(D4));
-
-	printf("\n");
-	PrintBitBoard(playBitBoard);
-	
-	count = CNT(playBitBoard);
-	
-	printf("Count:%d", count);
 		
+	for( index = 0; index < 64; ++index){
+		printf("Index:%d\n", index);
+		PrintBitBoard(SetMask[index]);
+		printf("\n");
+		
+	}
+	
 	return 0;
 }
