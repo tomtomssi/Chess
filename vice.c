@@ -3,21 +3,21 @@
 
 int main(){
 
-	int index = 0;
 	U64 playBitBoard = 0ULL;
+	int count;
 
 	AllInit();
-
-	printf("Begin heatings\n\n");
-	PrintBitBoard(playBitBoard);
 	
 	playBitBoard |= (1ULL << SQ64(D2));
-	printf("D2:ssa nappula:\n\n");
+	playBitBoard |= (1ULL << SQ64(D3));
+	playBitBoard |= (1ULL << SQ64(D4));
+
+	printf("\n");
 	PrintBitBoard(playBitBoard);
 	
-	playBitBoard |= (1ULL << SQ64(G2));
-	printf("G2:ssa nappula:\n\n");
-	PrintBitBoard(playBitBoard);
+	count = CNT(playBitBoard);
+	
+	printf("Count:%d", count);
 		
 	return 0;
 }
